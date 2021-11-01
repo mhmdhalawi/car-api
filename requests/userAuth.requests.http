@@ -1,2 +1,8 @@
-### Login User
-GET http://localhost:3000
+### create a new user
+POST  http://localhost:4000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "mhmd@gmail.com",
+    "password":"1234567"
+}
