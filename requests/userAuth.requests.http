@@ -3,6 +3,29 @@ POST  http://localhost:4000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "mhmd@gmail.com",
+    "email": "mhmd4@gmail.com",
     "password":"1234567"
 }
+
+### Update a User
+PATCH   http://localhost:4000/auth/1
+Content-Type: application/json
+
+{
+    "password": "12345"
+  
+}
+
+### Remove a user
+DELETE http://localhost:4000/auth/6
+
+
+### Get a User
+GET http://localhost:4000/auth/1
+
+
+### Get all Users
+GET http://localhost:4000/auth/
+
+### Get by Email
+GET http://localhost:4000/auth?email=mhmd@gmail.com

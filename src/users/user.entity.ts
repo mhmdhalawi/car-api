@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, AfterRemove } from 'typeorm';
 
 @Entity()
 export class User {
@@ -10,4 +10,9 @@ export class User {
 
   @Column()
   password: string;
+
+  @AfterRemove()
+  logRemove() {
+    console.log(`user ${this.email} has been removed`);
+  }
 }
