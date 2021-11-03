@@ -4,6 +4,7 @@ Content-Type: application/json
 
 {
     "email": "mhmd4@gmail.com",
+    "username": "mhmdhalawi",
     "password":"1234567"
 }
 
@@ -12,12 +13,12 @@ PATCH   http://localhost:4000/auth/1
 Content-Type: application/json
 
 {
-    "password": "12345"
+    "username": "mhmd"
   
 }
 
 ### Remove a user
-DELETE http://localhost:4000/auth/6
+DELETE http://localhost:4000/auth/1
 
 
 ### Get a User
