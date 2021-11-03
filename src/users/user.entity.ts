@@ -1,6 +1,7 @@
 import { IsOptional } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn, AfterRemove } from 'typeorm';
 
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()

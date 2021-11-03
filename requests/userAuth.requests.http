@@ -3,17 +3,17 @@ POST  http://localhost:4000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "mhmd2@gmail.com",
-    "username": "mhmd2",
+    "email": "mhmd@gmail.com",
+    "username": "mhmd10",
     "password":"1234567"
 }
 
 ### Update a User
-PATCH   http://localhost:4000/auth/3
+PATCH   http://localhost:4000/auth/4
 Content-Type: application/json
 
 {
-    "age" : 20
+    "age" : 10
   
 }
 
@@ -22,11 +22,11 @@ DELETE http://localhost:4000/auth/2
 
 
 ### Get a User
-GET http://localhost:4000/auth/1
+GET http://localhost:4000/auth/3
 
 
 ### Get all Users
 GET http://localhost:4000/auth/
 
 ### Get by Email
-GET http://localhost:4000/auth?email=mhmd@gmail.com
+GET http://localhost:4000/auth?email=mhmd2@gmail.com
