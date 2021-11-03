@@ -1,3 +1,4 @@
+import { IsOptional } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn, AfterRemove } from 'typeorm';
 
 @Entity()
@@ -10,6 +11,9 @@ export class User {
 
   @Column({ unique: true })
   username: string;
+
+  @Column({ default: '-' })
+  age: number;
 
   @Column()
   password: string;
