@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
@@ -14,7 +18,7 @@ export class AuthService {
   async signup(body: CreateUserDto) {
     //find user by email
     const user = await this.usersService.findByEmail(body.email);
-    if (user.length) {
+    if (user) {
       throw new BadRequestException('User already exists');
     }
 
@@ -40,12 +44,12 @@ export class AuthService {
   async signin(body: UserLoginDto) {
     //find user by email
     const user = await this.usersService.findByEmail(body.email);
-    if (!user.length) {
+    if (!user) {
       throw new NotFoundException('User does not exist');
     }
 
     // Split the hash and salt from the stored hash and salt
-    const [salt, storedHash] = user[0].password.split('.');
+    const [salt, storedHash] = user.password.split('.');
 
     // Generate a derived key from the password and salt
     const hash = (await scrypt(body.password, salt, 32)) as Buffer;

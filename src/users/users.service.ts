@@ -27,7 +27,7 @@ export class UsersService {
 
   //FIND by Email
   findByEmail(email: string) {
-    return this.repo.find({ email });
+    return this.repo.findOne({ email });
   }
 
   //UPDATE a User
