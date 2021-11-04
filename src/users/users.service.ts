@@ -3,13 +3,14 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { NotFoundError } from 'rxjs';
+import { CreateUserDto } from './dtos/create-user.dto';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
   //CREATE a User
-  create(body) {
+  create(body:CreateUserDto) {
     const user = this.repo.create({ ...body });
     return this.repo.save(user);
   }

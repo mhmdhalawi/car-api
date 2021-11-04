@@ -7,7 +7,7 @@ import {
   Patch,
   Delete,
   Query,
-  UseInterceptors,
+  Session,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
@@ -15,16 +15,31 @@ import { UserDto } from './dtos/user.dto';
 
 import { Serialize } from '../interceptors/serialize.interceptor';
 import { UsersService } from './users.service';
+import { AuthService } from './auth.service';
+import { UserLoginDto } from './dtos/user-login.dto';
 
 @Controller('auth')
 @Serialize(UserDto)
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private authservice: AuthService,
+  ) {}
 
   //POST a User
   @Post('/signup')
-  createUser(@Body() body: CreateUserDto) {
-    return this.usersService.create(body);
+  async createUser(@Body() body: CreateUserDto, @Session() session: any) {
+    const user = await this.authservice.signup(body);
+    session.userId = user.id;
+    return user;
+  }
+
+  @Post('/login')
+  async login(@Body() body: UserLoginDto, @Session() session: any) {
+    const user: any = await this.authservice.signin(body);
+    session.userId = user[0].id;
+    console.log('email', user[0].email);
+    return user;
   }
 
   //Find a User
