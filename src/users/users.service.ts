@@ -10,13 +10,15 @@ export class UsersService {
   constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
   //CREATE a User
-  create(body:CreateUserDto) {
+  create(body: CreateUserDto) {
     const user = this.repo.create({ ...body });
     return this.repo.save(user);
   }
 
   //FIND a User
   findOne(id: number) {
+    if (!id) throw new NotFoundException('user not found');
+
     return this.repo.findOne(id);
   }
 

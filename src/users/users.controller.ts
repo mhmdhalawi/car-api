@@ -17,6 +17,8 @@ import { Serialize } from '../interceptors/serialize.interceptor';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
 import { UserLoginDto } from './dtos/user-login.dto';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { User } from './user.entity';
 
 @Controller('auth')
 @Serialize(UserDto)
@@ -25,6 +27,24 @@ export class UsersController {
     private usersService: UsersService,
     private authservice: AuthService,
   ) {}
+
+  //FIND all users
+  @Get('/all')
+  findAllUsers() {
+    return this.usersService.findAll();
+  }
+
+  //Who AM I
+  @Get('/whoami')
+  whoAmI(@CurrentUser() user: User) {
+    return user;
+  }
+
+  //Post Sign out a user
+  @Post('/signout')
+  signOut(@Session() session: any) {
+    session.userId = null;
+  }
 
   //POST a User
   @Post('/signup')
@@ -47,15 +67,10 @@ export class UsersController {
     return this.usersService.findOne(parseInt(id));
   }
 
-  //FIND all users
-  @Get('/')
-  findAllUsers() {
-    return this.usersService.findAll();
-  }
-
   //FIND by Email
   @Get('')
   findUserByEmail(@Query('email') email: string) {
+    console.log('email', email);
     return this.usersService.findByEmail(email);
   }
 
