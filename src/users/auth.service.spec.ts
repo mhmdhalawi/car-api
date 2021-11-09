@@ -70,4 +70,29 @@ describe('AuthService', () => {
         done();
       });
   });
+
+  it('throws if an invalid password is provided', (done) => {
+    usersService.findByEmail = () => {
+      return Promise.resolve({ email: 'a', password: '1234', id: 1 } as User);
+    };
+    authService
+      .signin({ email: 'a', password: '123456' } as CreateUserDto)
+      .catch((err) => {
+        done();
+      });
+  });
+
+  it('returns a user if correct password is provided', () => {
+    // usersService.findByEmail = () => {
+    //   return Promise.resolve({ email: 'a', password: '1234', id: 1 } as User);
+    // };
+    // authService
+    //   .signin({ email: 'a', password: '1234' } as CreateUserDto)
+    //   .then((user) => {
+    //     expect(user).toBeDefined();
+    //   })
+    //   .catch((err) => {
+    //     console.log('error', err);
+    //   });
+  });
 });
