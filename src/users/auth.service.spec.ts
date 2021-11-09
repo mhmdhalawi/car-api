@@ -6,9 +6,10 @@ import { UsersService } from './users.service';
 
 describe('AuthService', () => {
   let authService: AuthService;
+  let usersService: Partial<UsersService>;
   beforeEach(async () => {
     // create a fake copy of the users service
-    const usersService: Partial<UsersService> = {
+    usersService = {
       findByEmail: () => Promise.resolve({} as User),
       create: (body: CreateUserDto) =>
         Promise.resolve({ id: 1, ...body } as User),
@@ -49,5 +50,24 @@ describe('AuthService', () => {
     const [salt, hash] = user.password.split('.');
     expect(salt).toBeDefined();
     expect(hash).toBeDefined();
+  });
+
+  it('throws an error if it finds an already existing user', (done) => {
+    usersService.findByEmail = () => {
+      return Promise.resolve({ email: 'a', password: '1234', id: 1 } as User);
+    };
+    authService
+      .signup({ email: 'a', password: '1234' } as CreateUserDto)
+      .catch((err) => {
+        done();
+      });
+  });
+
+  it('throws an error if no email is found for signing in', (done) => {
+    authService
+      .signin({ email: 'a', password: '1234' } as CreateUserDto)
+      .catch((err) => {
+        done();
+      });
   });
 });
