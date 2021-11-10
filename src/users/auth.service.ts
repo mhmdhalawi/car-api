@@ -18,7 +18,7 @@ export class AuthService {
   async signup(body: CreateUserDto) {
     //find user by email
     const user = await this.usersService.findByEmail(body.email);
-    if (user.email === body.email) {
+    if (user) {
       throw new BadRequestException('User already exists');
     }
 
