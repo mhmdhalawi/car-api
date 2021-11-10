@@ -73,7 +73,6 @@ export class UsersController {
   //FIND by Email
   @Get('')
   findUserByEmail(@Query('email') email: string) {
-    console.log('email', email);
     return this.usersService.findByEmail(email);
   }
 
