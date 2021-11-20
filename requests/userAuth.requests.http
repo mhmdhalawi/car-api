@@ -3,8 +3,8 @@ POST  http://localhost:4000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "ahmad@gmail.com",
-    "username": "ahmad",
+    "email": "mhmd@gmail.com",
+    "username": "mhmd",
     "password":"123456",
     "age": 20
 }
@@ -14,7 +14,7 @@ POST  http://localhost:4000/auth/login
 Content-Type: application/json
 
 {
-    "email": "ali2@gmail.com",
+    "email": "mhmd@gmail.com",
     "password" : "123456"
     
 }
