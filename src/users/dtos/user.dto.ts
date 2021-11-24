@@ -12,4 +12,7 @@ export class UserDto {
 
   @Expose()
   age: number;
+
+  @Expose()
+  admin: boolean;
 }
